@@ -1,19 +1,6 @@
-<script src="../../assets/admin/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="../../assets/admin/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-<script src="../../assets/admin/assets/pages/data-table/js/jszip.min.js"></script>
-<script src="../../assets/admin/assets/pages/data-table/js/pdfmake.min.js"></script>
-<script src="../../assets/admin/assets/pages/data-table/js/vfs_fonts.js"></script>
-<script src="../../assets/admin/bower_components/datatables.net-buttons/js/buttons.print.min.js"></script>
-<script src="../../assets/admin/bower_components/datatables.net-buttons/js/buttons.html5.min.js"></script>
-<script src="../../assets/admin/bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="../../assets/admin/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-<script src="../../assets/admin/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js"></script>
 
 <script>
-    // untuk datatable
-    $('#simpletable').DataTable();
-
     // untuk simpan data
     var untukTambahData = function() {
         var parsleyConfig = {
@@ -29,6 +16,7 @@
             e.preventDefault();
 
             $('#inpnama').attr('required', 'required');
+            $('#inptype').attr('required', 'required');
             $('#inpbobot').attr('required', 'required');
 
             if ($('#form-add').parsley().isValid() == true) {
@@ -81,13 +69,15 @@
 
                     $('form').attr('action', 'aksi/?aksi=kriteria_upd');
                     $('form').attr('id', 'form-upd');
-                    $('#inpidkriteria').attr('value', data.id_kriteria);
                     $('#inpidkriteria').attr('name', 'inpidkriteria');
-                    $('#inpnama').attr('value', data.nama_kriteria);
-                    $('#inpbobot').val(data.bobot);
-                    $('#add').html('<i class="fa fa-edit"></i> Upd');
+                    $('#inpidkriteria').attr('value', data.id_kriteria);
+                    $('#inpkode').attr('value', data.kode);
+                    $('#inpnama').attr('value', data.kriteria);
+                    $('#inptype').val(data.type);
+                    $('#inpbobot').attr('value', data.bobot);
+                    $('#add').html('Upd');
                     ini.removeAttr('disabled');
-                    ini.html('<i class="fa fa-edit"></i> Ubah');
+                    ini.html('Ubah');
                 }
             });
         });
@@ -108,6 +98,7 @@
             e.preventDefault();
 
             $('#inpnama').attr('required', 'required');
+            $('#inptype').attr('required', 'required');
             $('#inpbobot').attr('required', 'required');
 
             if ($('#form-upd').parsley().isValid() == true) {
@@ -118,7 +109,7 @@
                     dataType: 'json',
                     beforeSend: function() {
                         $('#add').attr('disabled', 'disabled');
-                        $('#add').html('<i class="fa fa-spinner"></i> Waiting...');
+                        $('#add').html('Waiting...');
                     },
                     success: function(data) {
                         console.log(data);
@@ -132,6 +123,7 @@
                             });
                         } else {
                             alert(data.text);
+                            location.reload();
                         }
                     }
                 })

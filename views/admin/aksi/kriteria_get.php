@@ -5,9 +5,11 @@ $row    = $query->fetch(PDO::FETCH_OBJ);
 
 $result = [];
 $result = [
-    "id_kriteria"   => $row->id_kriteria,
-    "nama_kriteria" => $row->nama_kriteria,
-    "bobot"         => $row->bobot,
+    "id_kriteria" => $row->id_kriteria,
+    "kode"        => $row->kode,
+    "kriteria"    => $row->kriteria,
+    "type"        => $row->type,
+    "bobot"       => $row->bobot,
 ];
 
 echo json_encode($result);
