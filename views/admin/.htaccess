@@ -1,0 +1,7 @@
+Options -Indexes
+
+# untuk memodifikasi url atau route
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ layout.php?content=$1 [L]
