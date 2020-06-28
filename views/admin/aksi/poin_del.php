@@ -1,6 +1,5 @@
 <?php
 $id = $_POST['id'];
-// untuk fungsi delete parameternya (nama_tabel, id, id_value)
 $delete = $pdo->Delete("tb_poin", "id_poin", $id);
 
 if ($delete == 1) {

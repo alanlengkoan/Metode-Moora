@@ -8,6 +8,12 @@
   <li class="<?php if ($_REQUEST['content'] == "kriteria") {echo "active";} ?>">
     <a href="kriteria">Kriteria</a>
   </li>
+    <li class="<?php if ($_REQUEST['content'] == "poin") {echo "active";} ?>">
+    <a href="poin">Poin</a>
+  </li>
+    <li class="<?php if ($_REQUEST['content'] == "evaluasi") {echo "active";} ?>">
+    <a href="evaluasi">Evaluasi</a>
+  </li>
   <li class="<?php if ($_REQUEST['content'] == "algoritma") {echo "active";} ?>">
     <a href="algoritma">Algoritma</a>
   </li>

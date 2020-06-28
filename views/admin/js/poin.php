@@ -1,19 +1,6 @@
-<script src="../../assets/admin/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="../../assets/admin/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-<script src="../../assets/admin/assets/pages/data-table/js/jszip.min.js"></script>
-<script src="../../assets/admin/assets/pages/data-table/js/pdfmake.min.js"></script>
-<script src="../../assets/admin/assets/pages/data-table/js/vfs_fonts.js"></script>
-<script src="../../assets/admin/bower_components/datatables.net-buttons/js/buttons.print.min.js"></script>
-<script src="../../assets/admin/bower_components/datatables.net-buttons/js/buttons.html5.min.js"></script>
-<script src="../../assets/admin/bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="../../assets/admin/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-<script src="../../assets/admin/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js"></script>
 
 <script>
-    // untuk datatable
-    $('#simpletable').DataTable();
-
     // untuk tambah data
     var untukTambahData = function() {
         var parsleyConfig = {
@@ -28,7 +15,9 @@
         $('#form-add').submit(function(e) {
             e.preventDefault();
 
+            $('#inpkdpoin').attr('required', 'required');
             $('#inppoin').attr('required', 'required');
+            $('#inpketerangan').attr('required', 'required');
 
             if ($('#form-add').parsley().isValid() == true) {
                 $.ajax({
@@ -82,8 +71,10 @@
                     $('form').attr('id', 'form-upd');
                     $('#inpidpoin').attr('value', data.id_poin);
                     $('#inpidpoin').attr('name', 'inpidpoin');
+                    $('#inpkdpoin').attr('value', data.kd_poin);
                     $('#inppoin').attr('value', data.poin);
-                    $('#add').html('<i class="fa fa-edit"></i> Upd');
+                    $('#inpketerangan').attr('value', data.kt_poin);
+                    $('#add').html('Upd');
                     ini.removeAttr('disabled');
                     ini.html('<i class="fa fa-edit"></i> Ubah');
                 }
@@ -105,7 +96,9 @@
         $(document).on('submit', '#form-upd', function(e) {
             e.preventDefault();
 
+            $('#inpkdpoin').attr('required', 'required');
             $('#inppoin').attr('required', 'required');
+            $('#inpketerangan').attr('required', 'required');
 
             if ($('#form-upd').parsley().isValid() == true) {
                 $.ajax({
