@@ -1,13 +1,11 @@
 <?php
-$id    = strip_tags($_POST['inpidevaluasi']);
-$kde_d = strip_tags($_POST['inpkddiagnosa']);
-$kde_g = strip_tags($_POST['inpkdgejala']);
-$cf    = strip_tags($_POST['inpcf']);
+$id_a = strip_tags($_POST['inpidalternatif']);
+$id_k = array_map("strip_tags", $_POST['inpidkriteria']);
+$nil  = array_map("strip_tags", $_POST['inpnilai']);
 
-$update = $pdo->Update('tb_evaluasi', 'id_evaluasi', $id, ['kd_diagnosa', 'kd_gejala', 'cf'], [$kde_d, $kde_g, $cf]);
-
-if ($update == 1) {
-    exit(json_encode(array('title' => 'Berhasil!', 'text' => 'Data diubah.', 'type' => 'success', 'button' => 'Ok!')));
-} else {
-    exit(json_encode(array('title' => 'Gagal!', 'text' => 'Data tidak diubah.', 'type' => 'error', 'button' => 'Ok!')));
+for ($i = 0; $i < count($id_k); $i++) {
+    $sql = "UPDATE tb_evaluasi SET nilai = $nil[$i] WHERE id_kriteria = '$id_k[$i]' AND id_alternatif = '$id_a'";
+    $qry = $pdo->Query($sql);
 }
+
+exit(json_encode(array('title' => 'Berhasil!', 'text' => 'Data diubah.', 'type' => 'success', 'button' => 'Ok!')));

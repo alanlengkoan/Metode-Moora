@@ -1,14 +1,19 @@
 <?php
+$id   = $_POST['id'];
+$qry1 = $pdo->GetWhere('tb_evaluasi', 'id_alternatif', $id);
+$qry2 = $pdo->GetWhere('tb_evaluasi', 'id_alternatif', $id);
+
 $result = [];
-$id     = $_POST['id'];
-$query  = $pdo->GetWhere('tb_evaluasi', 'id_evaluasi', $id);
-$row    = $query->fetch(PDO::FETCH_OBJ);
+$row = $qry1->fetch(PDO::FETCH_OBJ);
+$result['id_alternatif'] = $row->id_alternatif;
 
-$result = [
-    "id_evaluasi" => $row->id_evaluasi,
-    "kd_diagnosa" => $row->kd_diagnosa,
-    "kd_gejala"   => $row->kd_gejala,
-    "cf"          => $row->cf,
-];
+while ($rows = $qry2->fetch(PDO::FETCH_OBJ)) {
+    $result['detail'][] = [
+        "id_kriteria" => $rows->id_kriteria,
+        "nilai" => $rows->nilai,
+    ];
+}
 
+// echo '<pre>';
+// print_r($result);
 echo json_encode($result);
